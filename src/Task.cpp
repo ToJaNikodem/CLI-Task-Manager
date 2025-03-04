@@ -16,8 +16,6 @@ std::string formatCurrentTime(std::chrono::system_clock::time_point time)
     return outputStream.str();
 }
 
-std::array<std::string, 3> categories = {"Work", "Personal", "School"};
-
 Task::Task(const std::string &title, const std::string &description, Priority priority,
            std::chrono::system_clock::time_point deadline, const std::string &category)
     : m_title{title}, m_description{description}, m_priority{priority},
@@ -40,12 +38,12 @@ void Task::editTask(const std::string &newTitle, const std::string &newDescripti
     m_category = newCategory;
 }
 
-void Task::printTask()
+void Task::printTask() const
 {
-    std::cout << "Title: " << m_title << "\n";
-    std::cout << "Description: " << m_description << "\n";
-    std::cout << "Priority: " << static_cast<int>(m_priority) << "\n";
-    std::cout << "Deadline: " << formatCurrentTime(m_deadline) << "\n";
-    std::cout << "Category: " << m_category << "\n";
-    std::cout << "Completed: " << (m_completed ? "Yes" : "No") << "\n";
+    std::cout << "Title: " << m_title << '\n';
+    std::cout << "Description: " << m_description << '\n';
+    std::cout << "Priority: " << static_cast<int>(m_priority) << '\n';
+    std::cout << "Deadline: " << formatCurrentTime(m_deadline) << '\n';
+    std::cout << "Category: " << m_category << '\n';
+    std::cout << "Completed: " << (m_completed ? "Yes" : "No") << '\n';
 }

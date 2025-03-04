@@ -37,7 +37,7 @@ public:
         std::chrono::system_clock::time_point newDeadline,
         const std::string &newCategory);
 
-    void printTask();
+    void printTask() const;
     void completeTask();
 };
 
