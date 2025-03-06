@@ -1,13 +1,13 @@
 #include "Task.h"
 #include <iostream>
 #include <string>
-#include <vector>
+#include <map>
 #include <array>
 #include <iomanip>
 
 namespace TaskManager
 {
-    std::vector<Task> tasks{};
+    std::map<int, Task> tasks{};
     std::array<std::string, 3> categories = {"Work", "Personal", "School"};
 
     void showTasks()
@@ -19,7 +19,8 @@ namespace TaskManager
         }
         for (const auto &task : tasks)
         {
-            task.printTask();
+            std::cout << "\nTask ID: " << task.first << '\n';
+            task.second.printTask();
         }
     }
 
@@ -100,8 +101,35 @@ namespace TaskManager
             break;
         }
 
-        tasks.emplace_back(Task(title, description, priority, deadline, categories[category]));
+        static int taskId = 0;
+        tasks.emplace(taskId, Task(title, description, priority, deadline, categories[category]));
+        taskId++;
         std::cout << "Task added successfully!\n";
+    }
+
+    void deleteTask()
+    {
+        int taskId = -1;
+        std::cout << "Enter task ID to delete: ";
+        while (true)
+        {
+            std::cin >> taskId;
+            if (std::cin.fail())
+            {
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                std::cout << "Invalid input. Try again.\n";
+                continue;
+            }
+            break;
+        }
+        if (tasks.find(taskId) == tasks.end())
+        {
+            std::cout << "Task not found.\n";
+            return;
+        }
+        tasks.erase(taskId);
+        std::cout << "Task deleted successfully!\n";
     }
 }
 
@@ -140,7 +168,7 @@ int main()
             }
             else if (input == "4")
             {
-                // TODO: Delete
+                TaskManager::deleteTask();
                 break;
             }
             else if (input == "5")
