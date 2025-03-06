@@ -4,6 +4,6 @@ project(CLI-Task-Manager)
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-set(SOURCES src/main.cpp src/Task.cpp)
+set(SOURCES src/main.cpp src/Task.cpp src/TaskManager.cpp)
 
 add_executable(CLI-Task-Manager ${SOURCES})

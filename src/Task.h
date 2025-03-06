@@ -23,6 +23,9 @@ private:
     bool m_completed = false;
 
 public:
+    Task() : m_title{"Default Title"}, m_description{"Default Description"},
+             m_priority{Priority::LOW}, m_deadline{std::chrono::system_clock::now()},
+             m_category{"Default Category"} {};
     Task(
         const std::string &title,
         const std::string &description,
